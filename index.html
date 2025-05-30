@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Social Soundboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-8">
+
+  <div class="bg-white rounded-xl p-6 max-w-md w-full shadow space-y-4">
+    <h1 class="text-xl font-bold text-center">Social Soundboard</h1>
+
+    <div class="grid grid-cols-2 gap-4">
+      <button class="bg-blue-500 text-white py-2 rounded" onclick="playSound('applause')">Applause</button>
+      <button class="bg-yellow-500 text-white py-2 rounded" onclick="playSound('laugh')">Laugh</button>
+      <button class="bg-red-500 text-white py-2 rounded" onclick="playSound('boo')">Boo</button>
+      <button class="bg-green-500 text-white py-2 rounded" onclick="playSound('chime')">Chime</button>
+    </div>
+
+    <div class="text-right">
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="muteToggle" class="form-checkbox">
+        <span class="ml-2 text-sm text-gray-600">Mute</span>
+      </label>
+    </div>
+
+    <div class="text-sm text-gray-600 mt-4">
+      <h2 class="font-semibold mb-2">Recent Feedback:</h2>
+      <ul id="logList" class="list-disc pl-4 space-y-1"></ul>
+    </div>
+  </div>
+
+  <audio id="applause" src="https://www.soundjay.com/human/applause-01.mp3"></audio>
+  <audio id="laugh" src="https://www.soundjay.com/human/laugh-1.mp3"></audio>
+  <audio id="boo" src="https://www.soundjay.com/human/boo-1.mp3"></audio>
+  <audio id="chime" src="https://www.soundjay.com/button/button-3.mp3"></audio>
+
+  <script>
+    function playSound(type) {
+      if (document.getElementById("muteToggle").checked) return;
+
+      const audio = document.getElementById(type);
+      audio.currentTime = 0;
+      audio.play();
+
+      const log = document.createElement("li");
+      log.textContent = `Played: ${type}`;
+      document.getElementById("logList").prepend(log);
+    }
+  </script>
+
+</body>
+</html>
